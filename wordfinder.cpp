@@ -8,6 +8,7 @@
 #include "QuadraticProbing.h"
 #include "QueueAr.h"
 #include "substitution.h"
+#include "boggle.h"
 
 using namespace std;
 
@@ -55,6 +56,7 @@ void instructions()
 
     cout << "0. Exit\n"
          << "1. Substitute letters\n"
+	 << "2. Boggle word finder\n"
 	 << ">> ";
 
 }
@@ -81,6 +83,9 @@ int main()
 		    break;
 	    case 1: 
 		    substitute(&words);
+		    break;
+	    case 2:
+		    boggle(&words);
 		    break;
 	    default:
 		    break;
