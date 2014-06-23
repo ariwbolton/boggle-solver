@@ -13,7 +13,7 @@
 
 using namespace std;
 
-void init(ifstream * dict, QuadraticHashTable< string > * ht)
+void init(ifstream * dict, QuadraticHashTable< string > * ht, CTree * ct)
 {
     string word, prev;
     bool ins;
@@ -42,12 +42,18 @@ void init(ifstream * dict, QuadraticHashTable< string > * ht)
 	}
 	
 	if(ins)
+	{
 	    ht->insert(prev);
+	    ct->insert(prev, ht);
+	}
 
 	prev = word;
     }
 
+    word[0] = tolower(word[0]);
+
     ht->insert(word);
+    ct->insert(word, ht);
 
     //cout << n << endl;
 }
@@ -58,6 +64,7 @@ void instructions()
     cout << "0. Exit\n"
          << "1. Substitute letters\n"
 	 << "2. Boggle word finder\n"
+	 << "3. Find completions\n"
 	 << ">> ";
 
 }
@@ -70,7 +77,7 @@ int main()
     QuadraticHashTable< string > words(nf, 600000);
     CTree completiontree;
 
-    init(&dictionary, &words);
+    init(&dictionary, &words, &completiontree);
 
     do
     {
@@ -88,6 +95,9 @@ int main()
 		    break;
 	    case 2:
 		    boggle(&words);
+		    break;
+	    case 3:
+		    completiontree.comp();
 		    break;
 	    default:
 		    break;
