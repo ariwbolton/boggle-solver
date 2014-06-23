@@ -9,6 +9,7 @@
 #include "QueueAr.h"
 #include "substitution.h"
 #include "boggle.h"
+#include "completiontree.h"
 
 using namespace std;
 
@@ -67,6 +68,7 @@ int main()
     string nf;
     int choice;
     QuadraticHashTable< string > words(nf, 600000);
+    CTree completiontree;
 
     init(&dictionary, &words);
 
